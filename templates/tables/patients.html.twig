@@ -1,0 +1,111 @@
+{% extends 'layouts/layout.html.twig' %}
+{% block content %}
+
+
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>{{ pimcore_input('tablename') }}</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Šalter</a></li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item active">Data</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ pimcore_input('tabletitle') }}</h5>
+                            <p>{{ pimcore_textarea('maj') }}</p>
+
+                            <!-- Table with stripped rows -->
+                            <table class="table datatable">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <b>Ime</b>
+                                    </th>
+                                    <th>Prezime</th>
+                                    <th>Grad</th>
+                                    <th>JMBG</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for pacijent in patients %}
+                                        <tr>
+                                            <td>{{ pacijent.getFirstname() }}</td>
+                                            <td>{{ pacijent.getLastname() }}</td>
+                                            <td>{{ pacijent.getCity() }}</td>
+                                            <td>{{ pacijent.getJmbg() }}</td>
+                                            <td>{{ pacijent.getPregled() }}</td>
+                                        </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ pimcore_input('tabletitletwo') }}</h5>
+                            <p>{{ pimcore_textarea('majdva') }}</p>
+
+                            <!-- Table with stripped rows -->
+                            <table class="table datatable">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <b>Ime</b>
+                                    </th>
+                                    <th>Prezime</th>
+                                    <th>Doktor</th>
+                                    <th>Datum</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for examinedPatient in examinedPatients %}
+                                    <tr>
+                                        <td>{{ examinedPatient.getFirstname() }}</td>
+                                        <td>{{ examinedPatient.getLastname() }}</td>
+                                        <td>{{ examinedPatient.getDoktor() }}</td>
+                                        <td>{{ examinedPatient.getExaminationDate() }}</td>
+                                        <td>{{ examinedPatient.getPregled() }}</td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+
+{% endblock %}

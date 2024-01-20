@@ -941,6 +941,16 @@ h6 {
   font-size: 14px;
 }
 
+
+
+.label-auto-resize {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Display an ellipsis (...) if text overflows */
+    white-space: nowrap; /* Prevent label text from wrapping */
+
+}
+
 .dashboard .top-selling .table thead {
   background: #f6f6fe;
 }

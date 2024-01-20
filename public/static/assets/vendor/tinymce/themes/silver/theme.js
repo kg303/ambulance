@@ -8949,7 +8949,7 @@
       let RETURN_TRUSTED_TYPE = false;
       let SANITIZE_DOM = true;
       let SANITIZE_NAMED_PROPS = false;
-      const SANITIZE_NAMED_PROPS_PREFIX = 'user-content-';
+      const SANITIZE_NAMED_PROPS_PREFIX = 'user-home-';
       let KEEP_CONTENT = true;
       let IN_PLACE = false;
       let USE_PROFILES = {};
@@ -23166,17 +23166,17 @@
       getSkinUrlOption(editor).fold(() => {
         const skinUrl_ = getSkinUrl(editor);
         if (skinUrl_) {
-          editor.contentCSS.push(skinUrl_ + (isInline ? '/content.inline' : '/content') + '.min.css');
+          editor.contentCSS.push(skinUrl_ + (isInline ? '/home.inline' : '/home') + '.min.css');
         }
       }, skinUrl => {
-        const skinContentCss = 'ui/' + skinUrl + (isInline ? '/content.inline' : '/content') + '.css';
+        const skinContentCss = 'ui/' + skinUrl + (isInline ? '/home.inline' : '/home') + '.css';
         const css = tinymce.Resource.get(skinContentCss);
         if (isString(css)) {
           loadRawCss(editor, skinContentCss, css, editor.ui.styleSheetLoader);
         } else {
           const skinUrl_ = getSkinUrl(editor);
           if (skinUrl_) {
-            editor.contentCSS.push(skinUrl_ + (isInline ? '/content.inline' : '/content') + '.min.css');
+            editor.contentCSS.push(skinUrl_ + (isInline ? '/home.inline' : '/home') + '.min.css');
           }
         }
       });
@@ -28904,7 +28904,7 @@
         components: [{
             dom: {
               tag: 'div',
-              classes: ['tox-dialog__body-content']
+              classes: ['tox-dialog__body-home']
             },
             components: [memForm.asSpec()]
           }],
@@ -29368,7 +29368,7 @@
           TabSection.parts.tabview({
             dom: {
               tag: 'div',
-              classes: ['tox-dialog__body-content']
+              classes: ['tox-dialog__body-home']
             }
           })
         ],
@@ -29502,7 +29502,7 @@
       components: [{
           dom: {
             tag: 'div',
-            classes: ['tox-dialog__body-content']
+            classes: ['tox-dialog__body-home']
           },
           components: [{ dom: fromHtml(`<p>${ sanitizeHtmlString(providersBackstage.translate(message)) }</p>`) }]
         }]
@@ -30106,7 +30106,7 @@
     const renderInlineDialog = (dialogInit, extra, backstage, ariaAttrs = false, refreshDocking) => {
       const dialogId = generate$6('dialog');
       const dialogLabelId = generate$6('dialog-label');
-      const dialogContentId = generate$6('dialog-content');
+      const dialogContentId = generate$6('dialog-home');
       const internalDialog = dialogInit.internalDialog;
       const dialogSize = Cell(internalDialog.size);
       const dialogSizeClass = getDialogSizeClass(dialogSize.get()).toArray();

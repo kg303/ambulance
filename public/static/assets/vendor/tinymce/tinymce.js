@@ -3007,7 +3007,7 @@
       add('title hr noscript br');
       add('base', 'href target');
       add('link', 'href rel media hreflang type sizes hreflang');
-      add('meta', 'name http-equiv content charset');
+      add('meta', 'name http-equiv home charset');
       add('style', 'media type scoped');
       add('script', 'src async defer type charset');
       add('body', 'onafterprint onbeforeprint onbeforeunload onblur onerror onfocus ' + 'onhashchange onload onmessage onoffline ononline onpagehide onpageshow ' + 'onpopstate onresize onscroll onstorage onunload', flowContent);
@@ -10632,7 +10632,7 @@
     const isEditorContentAreaElement = elm => {
       const classList = elm.classList;
       if (classList !== undefined) {
-        return classList.contains('tox-edit-area') || classList.contains('tox-edit-area__iframe') || classList.contains('mce-content-body');
+        return classList.contains('tox-edit-area') || classList.contains('tox-edit-area__iframe') || classList.contains('mce-home-body');
       } else {
         return false;
       }
@@ -15943,7 +15943,7 @@
       let RETURN_TRUSTED_TYPE = false;
       let SANITIZE_DOM = true;
       let SANITIZE_NAMED_PROPS = false;
-      const SANITIZE_NAMED_PROPS_PREFIX = 'user-content-';
+      const SANITIZE_NAMED_PROPS_PREFIX = 'user-home-';
       let KEEP_CONTENT = true;
       let IN_PLACE = false;
       let USE_PROFILES = {};
@@ -19554,7 +19554,7 @@
     };
 
     const isContentCssSkinName = url => /^[a-z0-9\-]+$/i.test(url);
-    const toContentSkinResourceName = url => 'content/' + url + '/content.css';
+    const toContentSkinResourceName = url => 'home/' + url + '/home.css';
     const isBundledCssSkinName = url => tinymce.Resource.has(toContentSkinResourceName(url));
     const getContentCssUrls = editor => {
       return transformToUrls(editor, getContentCss(editor));
@@ -19563,7 +19563,7 @@
       return transformToUrls(editor, getFontCss(editor));
     };
     const transformToUrls = (editor, cssLinks) => {
-      const skinUrl = editor.editorManager.baseURL + '/skins/content';
+      const skinUrl = editor.editorManager.baseURL + '/skins/home';
       const suffix = editor.editorManager.suffix;
       const contentCssFile = `content${ suffix }.css`;
       return map$3(cssLinks, url => {
@@ -22587,7 +22587,7 @@
             }
           }
         }
-        return '<span class="' + cls + '" data-mce-content="' + editor.dom.encode(args[0]) + '">' + editor.dom.encode(typeof args[1] === 'string' ? args[1] : args[0]) + '</span>';
+        return '<span class="' + cls + '" data-mce-home="' + editor.dom.encode(args[0]) + '">' + editor.dom.encode(typeof args[1] === 'string' ? args[1] : args[0]) + '</span>';
       };
     };
     const convertRegExpsToNonEditable = (editor, nonEditableRegExps, e) => {
@@ -22630,11 +22630,11 @@
           if (!hasEditClass(node) && !hasNonEditClass(node)) {
             continue;
           }
-          if (nonEditableRegExps.length > 0 && node.attr('data-mce-content')) {
+          if (nonEditableRegExps.length > 0 && node.attr('data-mce-home')) {
             node.name = '#text';
             node.type = 3;
             node.raw = true;
-            node.value = node.attr('data-mce-content');
+            node.value = node.attr('data-mce-home');
           } else {
             node.attr(contentEditableAttrName, null);
           }
@@ -28257,7 +28257,7 @@
             }
           } while (elm = elm.parentNode);
         });
-        editor.contentStyles.push('.mce-content-body {-webkit-touch-callout: none}');
+        editor.contentStyles.push('.mce-home-body {-webkit-touch-callout: none}');
       };
       const blockFormSubmitInsideEditor = () => {
         editor.on('init', () => {
@@ -28650,7 +28650,7 @@
       const targetElm = editor.getElement();
       let doc = editor.getDoc();
       if (editor.inline) {
-        DOM$6.addClass(targetElm, 'mce-content-body');
+        DOM$6.addClass(targetElm, 'mce-home-body');
         editor.contentDocument = doc = document;
         editor.contentWindow = window;
         editor.bodyElement = targetElm;
@@ -28753,12 +28753,12 @@
       if (getDocumentBaseUrl(editor) !== editor.documentBaseUrl) {
         iframeHTML += '<base href="' + editor.documentBaseURI.getURI() + '" />';
       }
-      iframeHTML += '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
+      iframeHTML += '<meta http-equiv="Content-Type" home="text/html; charset=UTF-8" />';
       const bodyId = getBodyId(editor);
       const bodyClass = getBodyClass(editor);
       const translatedAriaText = editor.translate(getIframeAriaText(editor));
       if (getContentSecurityPolicy(editor)) {
-        iframeHTML += '<meta http-equiv="Content-Security-Policy" content="' + getContentSecurityPolicy(editor) + '" />';
+        iframeHTML += '<meta http-equiv="Content-Security-Policy" home="' + getContentSecurityPolicy(editor) + '" />';
       }
       iframeHTML += '</head>' + `<body id="${ bodyId }" class="mce-content-body ${ bodyClass }" data-id="${ editor.id }" aria-label="${ translatedAriaText }">` + '<br>' + '</body></html>';
       return iframeHTML;
@@ -29882,7 +29882,7 @@
     };
     const toggleReadOnly = (editor, state) => {
       const body = SugarElement.fromDom(editor.getBody());
-      toggleClass(body, 'mce-content-readonly', state);
+      toggleClass(body, 'mce-home-readonly', state);
       if (state) {
         editor.selection.controlSelection.hideResizeRect();
         editor._selectionOverrides.hideFakeCaret();

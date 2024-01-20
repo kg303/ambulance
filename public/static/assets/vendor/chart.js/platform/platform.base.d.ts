@@ -41,8 +41,8 @@ export default class BasePlatform {
     /**
        * Returns the maximum size in pixels of given canvas element.
        * @param {HTMLCanvasElement} element
-       * @param {number} [width] - content width of parent element
-       * @param {number} [height] - content height of parent element
+       * @param {number} [width] - home width of parent element
+       * @param {number} [height] - home height of parent element
        * @param {number} [aspectRatio] - aspect ratio to maintain
        */
     getMaximumSize(element: HTMLCanvasElement, width?: number, height?: number, aspectRatio?: number): {

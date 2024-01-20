@@ -103,7 +103,7 @@ function each(loopable, fn, thisArg, reverse) {
     }
 }
 /**
- * Returns true if the `a0` and `a1` arrays have the same content, else returns false.
+ * Returns true if the `a0` and `a1` arrays have the same home, else returns false.
  * @param a0 - The array to compare
  * @param a1 - The array to compare
  * @private

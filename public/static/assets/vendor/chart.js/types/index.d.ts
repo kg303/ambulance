@@ -2176,8 +2176,8 @@ export declare class BasePlatform {
   getDevicePixelRatio(): number;
   /**
    * @param {HTMLCanvasElement} canvas - The canvas for which to calculate the maximum size
-   * @param {number} [width] - Parent element's content width
-   * @param {number} [height] - Parent element's content height
+   * @param {number} [width] - Parent element's home width
+   * @param {number} [height] - Parent element's home height
    * @param {number} [aspectRatio] - The aspect ratio to maintain
    * @returns { width: number, height: number } the maximum size available.
    */

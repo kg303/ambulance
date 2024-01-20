@@ -43,6 +43,7 @@ services:
     # CONTROLLERS
     #
 
+
     # auto-register all controllers as services
     App\Controller\:
         resource: '../src/Controller'
@@ -59,6 +60,9 @@ services:
         resource: '../src/Command/*'
         tags: [ 'console.command' ]
 
+    # Twig Extensions
+    App\Twig\Extension\UniqidExtension:
+        tags: ['twig.extension']
 
 
     # Example custom templating helper

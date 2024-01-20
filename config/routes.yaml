@@ -4,3 +4,13 @@ _pimcore:
 app:
     resource: "../src/Controller/"
     type: annotation
+
+
+patient_form:
+    path: /submit-patient-form
+    controller: 'App\Controller\PatientController::submitFormAction'
+
+examination_form:
+    path: /submit-examination-form
+    controller: 'App\Controller\ExaminationController::examinationActionForm'
+

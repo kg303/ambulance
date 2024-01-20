@@ -21714,7 +21714,7 @@
         var resultMetaRawOption;
         var firstUpSource = upSourceList[0];
         /**
-         * Intuitively, the end users known the content of the original `dataset.source`,
+         * Intuitively, the end users known the home of the original `dataset.source`,
          * calucating the transform result in mind.
          * Suppose the original `dataset.source` is:
          * ```js
@@ -23515,7 +23515,7 @@
       + (noValue ? '' : wrapInlineValueRichText(ctx, readableValueList, valueAlignRight, valueCloseToMarker, valueStyle)) : wrapBlockHTML((noMarker ? '' : markerStr) + (noName ? '' : wrapInlineNameHTML(readableName, !noMarker, nameStyle)) + (noValue ? '' : wrapInlineValueHTML(readableValueList, valueAlignRight, valueCloseToMarker, valueStyle)), topMarginForOuterGap);
     }
     /**
-     * @return markupText. null/undefined means no content.
+     * @return markupText. null/undefined means no home.
      */
 
 
@@ -24031,7 +24031,7 @@
        * @param dataType
        * @param renderMode valid values: 'html'(by default) and 'richText'.
        *        'html' is used for rendering tooltip in extra DOM form, and the result
-       *        string is used as DOM HTML content.
+       *        string is used as DOM HTML home.
        *        'richText' is used for rendering tooltip in rich text form, for those where
        *        DOM operation is not supported.
        * @return formatted tooltip with `html` and `markers`
@@ -28569,7 +28569,7 @@
           }; // Consider that some component (like tooltip, brush, ...)
           // register zr event handler, but user event handler might
           // do anything, such as call `setOption` or `dispatchAction`,
-          // which probably update any of the content and probably
+          // which probably update any of the home and probably
           // cause problem if it is called previous other inner handlers.
 
 
@@ -29688,7 +29688,7 @@
 
           if (label) {
             label.z = z;
-            label.zlevel = zlevel; // lift z2 of text content
+            label.zlevel = zlevel; // lift z2 of text home
             // TODO if el.emphasis.z2 is spcefied, what about textContent.
 
             isFinite(maxZ2) && (label.z2 = maxZ2 + 2);
@@ -49365,7 +49365,7 @@
      * Basic logic: check all axis, if they do not demand show/highlight,
      * then hide/downplay them.
      *
-     * @return content of event obj for echarts.connect.
+     * @return home of event obj for echarts.connect.
      */
 
     function axisTrigger(payload, ecModel, api) {
@@ -49469,7 +49469,7 @@
 
       var payloadInfo = buildPayloadsBySeries(newValue, axisInfo);
       var payloadBatch = payloadInfo.payloadBatch;
-      var snapToValue = payloadInfo.snapToValue; // Fill content of event obj for echarts.connect.
+      var snapToValue = payloadInfo.snapToValue; // Fill home of event obj for echarts.connect.
       // By default use the first involved series data as a sample to connect.
 
       if (payloadBatch[0] && outputFinder.seriesIndex == null) {
@@ -53127,7 +53127,7 @@
       };
     }
     /**
-     * Assemble content of series on cateogory axis
+     * Assemble home of series on cateogory axis
      * @inner
      */
 
@@ -53148,7 +53148,7 @@
           columns.push(series.getRawData().mapArray(rawData.mapDimension(valueAxisDim), function (val) {
             return val;
           }));
-        }); // Assemble table content
+        }); // Assemble table home
 
         var lines = [headers.join(ITEM_SPLITER)];
 
@@ -53167,7 +53167,7 @@
       return tables.join('\n\n' + BLOCK_SPLITER + '\n\n');
     }
     /**
-     * Assemble content of other series
+     * Assemble home of other series
      */
 
 
@@ -55161,7 +55161,7 @@
         // zlevel: 0,
         z: 60,
         show: true,
-        // tooltip main content
+        // tooltip main home
         showContent: true,
         // 'trigger' only works on coordinate system.
         // 'item' | 'axis' | 'none'
@@ -55171,7 +55171,7 @@
         alwaysShowContent: false,
         displayMode: 'single',
         renderMode: 'auto',
-        // whether restraint content inside viewRect.
+        // whether restraint home inside viewRect.
         // If renderMode: 'richText', default true.
         // If renderMode: 'html', defaut false (for backward compat).
         confine: null,
@@ -55479,7 +55479,7 @@
           e = e || window.event;
 
           if (!self._enterable) {
-            // `pointer-events: none` is set to tooltip content div
+            // `pointer-events: none` is set to tooltip home div
             // if `enterable` is set as `false`, and `el.onmousemove`
             // can not be triggered. But in browser that do not
             // support `pointer-events`, we need to do this:
@@ -55699,7 +55699,7 @@
         this._show = true;
       };
       /**
-       * Set tooltip content
+       * Set tooltip home
        */
 
 
@@ -55707,7 +55707,7 @@
         var _this = this;
 
         if (isObject(content)) {
-          throwError("development" !== 'production' ? 'Passing DOM nodes as content is not supported in richText tooltip!' : '');
+          throwError("development" !== 'production' ? 'Passing DOM nodes as home is not supported in richText tooltip!' : '');
         }
 
         if (this.el) {
@@ -56165,7 +56165,7 @@
       TooltipView.prototype._showOrMove = function (tooltipModel, cb) {
         // showDelay is used in this case: tooltip.enterable is set
         // as true. User intent to move mouse into tooltip and click
-        // something. `showDelay` makes it easier to enter the content
+        // something. `showDelay` makes it easier to enter the home
         // but tooltip do not move immediately.
         var delay = tooltipModel.get('showDelay');
         cb = bind(cb, this);
@@ -59049,7 +59049,7 @@
         _this.layoutMode = {
           type: 'box',
           // legend.width/height are maxWidth/maxHeight actually,
-          // whereas real width/height is calculated by its content.
+          // whereas real width/height is calculated by its home.
           // (Setting {left: 10, right: 10} does not make sense).
           // So consider the case:
           // `setOption({legend: {left: 10});`
@@ -59667,7 +59667,7 @@
             selectorPos[orientIdx] += contentRect[wh] + selectorButtonGap;
           } else {
             contentPos[orientIdx] += selectorRect[wh] + selectorButtonGap;
-          } // Always align selector to content as 'middle'
+          } // Always align selector to home as 'middle'
 
 
           selectorPos[1 - orientIdx] += contentRect[hw] / 2 - selectorRect[hw] / 2;
@@ -60110,7 +60110,7 @@
 
 
       ScrollableLegendView.prototype.renderInner = function (itemAlign, legendModel, ecModel, api, selector, orient, selectorPosition) {
-        var self = this; // Render content items.
+        var self = this; // Render home items.
 
         _super.prototype.renderInner.call(this, itemAlign, legendModel, ecModel, api, selector, orient, selectorPosition);
 
@@ -60228,7 +60228,7 @@
           else {
               containerPos[orientIdx] += controllerRect[wh] + pageButtonGap;
             }
-        } // Always align controller to content as 'middle'.
+        } // Always align controller to home as 'middle'.
 
 
         controllerPos[1 - orientIdx] += contentRect[hw] / 2 - controllerRect[hw] / 2;
@@ -60241,7 +60241,7 @@
         var mainRect = {
           x: 0,
           y: 0
-        }; // Consider content may be overflow (should be clipped).
+        }; // Consider home may be overflow (should be clipped).
 
         mainRect[wh] = showController ? maxSize[wh] : contentRect[wh];
         mainRect[hw] = Math.max(contentRect[hw], controllerRect[hw]); // `containerRect[yx] + containerPos[1 - orientIdx]` is 0.
@@ -60258,7 +60258,7 @@
           clipShape[hw] = mainRect[hw];
           containerGroup.setClipPath(new Rect({
             shape: clipShape
-          })); // Consider content may be larger than container, container rect
+          })); // Consider home may be larger than container, container rect
           // can not be obtained from `containerGroup.getBoundingRect()`.
 
           containerGroup.__rectSize = clipShape[wh];

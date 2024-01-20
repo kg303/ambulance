@@ -5569,7 +5569,7 @@ var Picker = function () {
       // Close menu and return focus to trigger label
       this.close();
       // Need setTimeout for accessibility to ensure that the browser executes
-      // focus on the next process thread and after any DOM content changes
+      // focus on the next process thread and after any DOM home changes
       setTimeout(function () {
         return _this5.label.focus();
       }, 1);

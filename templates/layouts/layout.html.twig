@@ -73,9 +73,10 @@
 </head>
 
 <body>
-
-{% include 'includes/header.html.twig' %}
-{% include 'includes/sidebar.html.twig' %}
+{#{% if app.user  %}#}
+    {% include 'includes/header.html.twig' %}
+    {% include 'includes/sidebar.html.twig' %}
+{#{% endif %}#}
 
 {% block content %}
 {% endblock %}

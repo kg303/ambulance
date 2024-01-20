@@ -21117,7 +21117,7 @@
         var resultMetaRawOption;
         var firstUpSource = upSourceList[0];
         /**
-         * Intuitively, the end users known the content of the original `dataset.source`,
+         * Intuitively, the end users known the home of the original `dataset.source`,
          * calucating the transform result in mind.
          * Suppose the original `dataset.source` is:
          * ```js
@@ -23133,7 +23133,7 @@
        * @param dataType
        * @param renderMode valid values: 'html'(by default) and 'richText'.
        *        'html' is used for rendering tooltip in extra DOM form, and the result
-       *        string is used as DOM HTML content.
+       *        string is used as DOM HTML home.
        *        'richText' is used for rendering tooltip in rich text form, for those where
        *        DOM operation is not supported.
        * @return formatted tooltip with `html` and `markers`
@@ -27567,7 +27567,7 @@
           }; // Consider that some component (like tooltip, brush, ...)
           // register zr event handler, but user event handler might
           // do anything, such as call `setOption` or `dispatchAction`,
-          // which probably update any of the content and probably
+          // which probably update any of the home and probably
           // cause problem if it is called previous other inner handlers.
 
 
@@ -28686,7 +28686,7 @@
 
           if (label) {
             label.z = z;
-            label.zlevel = zlevel; // lift z2 of text content
+            label.zlevel = zlevel; // lift z2 of text home
             // TODO if el.emphasis.z2 is spcefied, what about textContent.
 
             isFinite(maxZ2) && (label.z2 = maxZ2 + 2);

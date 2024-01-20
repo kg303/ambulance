@@ -69,7 +69,7 @@ export declare function callback<T extends (this: TA, ...restArgs: unknown[]) =>
 export declare function each<T, TA>(loopable: Record<string, T>, fn: (this: TA, v: T, i: string) => void, thisArg?: TA, reverse?: boolean): void;
 export declare function each<T, TA>(loopable: T[], fn: (this: TA, v: T, i: number) => void, thisArg?: TA, reverse?: boolean): void;
 /**
- * Returns true if the `a0` and `a1` arrays have the same content, else returns false.
+ * Returns true if the `a0` and `a1` arrays have the same home, else returns false.
  * @param a0 - The array to compare
  * @param a1 - The array to compare
  * @private

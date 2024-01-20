@@ -6,15 +6,52 @@ use Pimcore\Controller\FrontendController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bridge\Twig\Attribute\Template;
+use Pimcore\Model\DataObject\Patient;
+use Pimcore\Model\DataObject\Service;
+use Pimcore\Model\DataObject\Patient\Listing as PatientListing; // Import the Patient Listing class
+
 
 class DefaultController extends FrontendController
 {
 
-    #[Template('content/main.html.twig')]
+    #[Template('home/main.html.twig')]
     public function defaultAction(Request $request)
     {
-        return [];
+        $patients = Patient::getList();
+        $patientsExamined = iterator_to_array($patients);
+
+        $totalPatientsCount = count($patientsExamined);
+
+        // Count 'pregledan' patients
+        $pregledanCount = count(array_filter($patientsExamined, function ($patient) {
+            return $patient->getPregled() === 'Pregledan';
+        }));
+
+        // Count 'nepregledan' patients
+        $nepregledanCount = count(array_filter($patientsExamined, function ($patient) {
+            return $patient->getPregled() === 'Ne pregledan';
+        }));
+
+        // Count 'nepregledan' patients
+        $umroCount = count(array_filter($patientsExamined, function ($patient) {
+            return $patient->getPregled() === 'Umro';
+        }));
+
+        // Calculate the percentages
+        $pregledanPercentage = ($totalPatientsCount > 0) ? ($pregledanCount / $totalPatientsCount * 100) : 0;
+        $nepregledanPercentage = ($totalPatientsCount > 0) ? ($nepregledanCount / $totalPatientsCount * 100) : 0;
+
+        return $this->render('home/main.html.twig', [
+            'patients' => $patients,
+            'totalPatientsCount' => $totalPatientsCount,
+            'pregledan' => $pregledanCount,
+            'nepregledan' => $nepregledanCount,
+            'pregledanPercentage' => $pregledanPercentage,
+            'nepregledanPercentage' => $nepregledanPercentage,
+            'umroPercentage' => $umroCount
+        ]);
     }
+
 
 
     #[Template('includes/footer.html.twig')]
