@@ -5,15 +5,16 @@
 namespace App\Controller;
 
 use Pimcore\Controller\FrontendController;
-use Pimcore\Model\DataObject\Examinations; // Make sure to import your DataObject class
+use Pimcore\Model\DataObject\Examinations;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Pimcore\Translation\Translator;
-use Pimcore\Http\Request\Resolver\DocumentResolver;
 use Pimcore\Model\DataObject\Service;
 use Symfony\Component\Routing\Annotation\Route;
 use Carbon\Carbon;
-use Pimcore\Model\DataObject\Doctor; // Import the Doctor class
+use Pimcore\Model\DataObject\Patient;
+use Pimcore\Model\DataObject\Doctor;
+
 
 
 class ExaminationController extends FrontendController
@@ -29,9 +30,21 @@ class ExaminationController extends FrontendController
         // Handle form submission manually
         if ($request->isMethod('POST')) {
             $formData = $request->request->all();
+
             // Validate form data manually
             if ($this->validateFormData($formData)) {
-                // Process and save data
+                // Process and save Patient
+                $patient = new Patient();
+                $patient->setParent(Service::createFolderByPath('/patients/new'));
+                $patient->setKey($formData['firstname'].$formData['lastname']);
+                $patient->setFirstname($formData['firstname']);
+                $patient->setLastname($formData['lastname']);
+                $patient->setPregled($formData['status']);
+                $patient->setDescription($formData['diagnosis']);
+                // Add any other necessary properties for Patient
+                $patient->save();
+
+                // Process and save Examination
                 $examination = new Examinations();
                 $examination->setParent(Service::createFolderByPath('/examinations'));
                 $examination->setKey($formData['firstname'].$formData['lastname']);
@@ -41,6 +54,13 @@ class ExaminationController extends FrontendController
                 $examination->setDiagnosis($formData['diagnosis']);
                 $examinationDate = Carbon::parse($formData['date']);
                 $examination->setExaminationDate($examinationDate);
+                $examination->setPregled($formData['status']);
+
+                // Associate Examination with Patient
+                $examination->setPatientrelation($patient);
+
+                // Save both Patient and Examination
+                $patient->save();
                 $examination->save();
 
                 $this->addFlash('success', $translator->trans('general.examination-submitted'));
@@ -71,8 +91,6 @@ class ExaminationController extends FrontendController
             'examinations' => $examination,
         ]);
     }
-
-
 
 
 }

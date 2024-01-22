@@ -11,4 +11,5 @@ return [
     Pimcore\Bundle\UuidBundle\PimcoreUuidBundle::class => ['all' => true],
     Pimcore\Bundle\WordExportBundle\PimcoreWordExportBundle::class => ['all' => true],
     Pimcore\Bundle\XliffBundle\PimcoreXliffBundle::class => ['all' => true],
+    Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
 ];

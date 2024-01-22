@@ -14,3 +14,13 @@ examination_form:
     path: /submit-examination-form
     controller: 'App\Controller\ExaminationController::examinationActionForm'
 
+doctor_form:
+    path: /submit-doctor-form
+    controller: 'App\Controller\DoctorController::doctorSubmitAction'
+
+patient_class_edit:
+    path: /Pacijenti/edit/{id}
+    controller: 'App\Controller\PatientController::edit'
+    methods: [GET, POST]
+
+

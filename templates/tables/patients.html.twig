@@ -34,7 +34,7 @@
                                     </th>
                                     <th>Prezime</th>
                                     <th>Grad</th>
-                                    <th>JMBG</th>
+                                    <th>Edit</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
@@ -45,8 +45,14 @@
                                             <td>{{ pacijent.getFirstname() }}</td>
                                             <td>{{ pacijent.getLastname() }}</td>
                                             <td>{{ pacijent.getCity() }}</td>
-                                            <td>{{ pacijent.getJmbg() }}</td>
-                                            <td>{{ pacijent.getPregled() }}</td>
+                                            <td><a href="{{ path('patient_class_edit', {'id': pacijent.id}) }}">Edit</a></td>
+                                                {% if pacijent.getPregled() == 'Pregledan' %}
+                                                    <td><span class="badge bg-success">{{ pacijent.getPregled() }}</span></td>
+                                                {% elseif pacijent.getPregled() == 'Ne pregledan' %}
+                                                    <td><span class="badge bg-warning">{{ pacijent.getPregled() }}</span></td>
+                                                {% else %}
+                                                    <td><span class="badge bg-danger">{{ pacijent.getPregled() }}</span></td>
+                                                {% endif %}
                                         </tr>
                                     {% endfor %}
 
@@ -91,7 +97,14 @@
                                         <td>{{ examinedPatient.getLastname() }}</td>
                                         <td>{{ examinedPatient.getDoktor() }}</td>
                                         <td>{{ examinedPatient.getExaminationDate() }}</td>
-                                        <td>{{ examinedPatient.getPregled() }}</td>
+
+                                            {% if examinedPatient.getPregled() == 'Pregledan' %}
+                                                <td><span class="badge bg-success">{{ examinedPatient.getPregled() }}</span></td>
+                                            {% elseif examinedPatient.getPregled() == 'Ne pregledan' %}
+                                                <td><span class="badge bg-warning">{{ examinedPatient.getPregled() }}</span></td>
+                                            {% else %}
+                                                <td><span class="badge bg-danger">{{ examinedPatient.getPregled() }}</span></td>
+                                            {% endif %}
                                     </tr>
                                 {% endfor %}
 

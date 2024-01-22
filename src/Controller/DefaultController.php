@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Pimcore\Model\DataObject\Patient;
+use Pimcore\Model\DataObject\Examinations;
 use Pimcore\Model\DataObject\Service;
 use Pimcore\Model\DataObject\Patient\Listing as PatientListing; // Import the Patient Listing class
 
@@ -18,6 +19,7 @@ class DefaultController extends FrontendController
     public function defaultAction(Request $request)
     {
         $patients = Patient::getList();
+
         $patientsExamined = iterator_to_array($patients);
 
         $totalPatientsCount = count($patientsExamined);

@@ -26,27 +26,43 @@ class PatientController extends FrontendController
         // Handle form submission manually
         if ($request->isMethod('POST')) {
             $formData = $request->request->all();
-            // Validate form data manually
-            if ($this->validateFormData($formData)) {
-                // Process and save data
+
+            // Check if the patient already exists by checking a unique identifier (e.g., JMBG)
+            $existingPatient = Patient::getByJmbg($formData['jmbg'], 1);
+            if ($existingPatient instanceof Patient) {
+                // Update existing patient
+                $existingPatient->setFirstname($formData['firstname']);
+                $existingPatient->setLastname($formData['lastname']);
+                $existingPatient->setDescription($formData['description']);
+                $existingPatient->setPregled($formData['status']);
+                $existingPatient->setCity($formData['city']);
+                // Update other fields as needed
+
+                // Save changes
+                $existingPatient->save();
+
+                $this->addFlash('success', $translator->trans('general.patient-updated'));
+            } else {
+                // Create new patient with a unique key
+                $key = $formData['firstname'] . $formData['lastname'] . '_' . time();
                 $patient = new Patient();
                 $patient->setParent(Service::createFolderByPath('/patients/new'));
-                $patient->setKey($formData['firstname'].$formData['lastname']);
+                $patient->setKey($key);
                 $patient->setFirstname($formData['firstname']);
                 $patient->setLastname($formData['lastname']);
                 $patient->setDescription($formData['description']);
-
+                $patient->setPregled($formData['status']);
                 $patient->setJmbg($formData['jmbg']);
                 $patient->setCity($formData['city']);
+                // Set other fields as needed
 
+                // Save changes
                 $patient->save();
 
                 $this->addFlash('success', $translator->trans('general.patient-submitted'));
-
-                return $this->redirect($request->server->get('HTTP_REFERER'));
-            } else {
-                $this->addFlash('error', $translator->trans('general.form-validation-failed'));
             }
+
+            return $this->redirect($request->server->get('HTTP_REFERER'));
         }
 
         return $this->render('error/404.html.twig');
@@ -54,8 +70,7 @@ class PatientController extends FrontendController
 
     private function validateFormData(array $formData): bool
     {
-        // Perform manual validation logic
-        // Return true if data is valid, false otherwise
+
         return isset($formData['firstname']) && isset($formData['lastname']);
     }
 
@@ -70,6 +85,21 @@ class PatientController extends FrontendController
             'examinedPatients' => $examinedPatients
         ]);
     }
+
+    public function edit(int $id): Response
+    {
+        // Fetch patient data based on the $id
+        $patient = Patient::getById($id);
+
+        if (!$patient instanceof Patient) {
+            // Handle the case where the patient with the given $id is not found
+            throw $this->createNotFoundException('Patient not found');
+        }
+
+        // Render the patient profile template with the patient data
+        return $this->render('profile/patient.html.twig', ['patient' => $patient]);
+    }
+
 
 
 }

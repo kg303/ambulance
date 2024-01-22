@@ -112,8 +112,8 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">#ID</th>
-                                        <th scope="col">Pacijent</th>
-                                        <th scope="col">Doktor</th>
+                                        <th scope="col">Ime</th>
+                                        <th scope="col">Prezime</th>
                                         <th scope="col">Status</th>
                                     </tr>
                                     </thead>
@@ -124,7 +124,7 @@
 
                                                 <th scope="row"><a href="#">#{{ pacijent.getId() }}</a></th>
                                                 <td>{{ pacijent.getFirstname() }}</td>
-                                                <td><a href="#" class="text-primary">{{ pacijent.getLastname() }}</a></td>
+                                                <td><a href="{{ path('patient_class_edit', {'id': pacijent.getId()}) }}" class="text-primary">{{ pacijent.getLastname() }}</a></td>
 
                                                         {% if pacijent.getPregled() == 'Pregledan' %}
                                                             <td><span class="badge bg-success">{{ pacijent.getPregled() }}</span></td>
