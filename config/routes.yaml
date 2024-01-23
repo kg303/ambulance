@@ -23,4 +23,20 @@ patient_class_edit:
     controller: 'App\Controller\PatientController::edit'
     methods: [GET, POST]
 
+patient_remove:
+    path: /Pacijenti/remove/{id}
+    controller: 'App\Controller\PatientController::remove'
+
+patient_list:
+    path: /Pacijenti
+    controller: 'App\Controller\PatientController::listingAction'
+    methods: ['GET']
+
+Prijava:
+    path: /Prijava
+    controller: 'App\Controller\LoginController::loginAction'
+
+register:
+    path: /Registracija
+    controller: 'App\Controller\RegisterController::registerAction'
 

@@ -9,14 +9,15 @@ use Symfony\Bridge\Twig\Attribute\Template;
 use Pimcore\Model\DataObject\Patient;
 use Pimcore\Model\DataObject\Examinations;
 use Pimcore\Model\DataObject\Service;
-use Pimcore\Model\DataObject\Patient\Listing as PatientListing; // Import the Patient Listing class
+use Pimcore\Model\DataObject\Patient\Listing as PatientListing;
+use Symfony\Component\Security\Core\Security;
 
 
 class DefaultController extends FrontendController
 {
 
     #[Template('home/main.html.twig')]
-    public function defaultAction(Request $request)
+    public function defaultAction(Request $request, Security $security)
     {
         $patients = Patient::getList();
 
@@ -24,22 +25,18 @@ class DefaultController extends FrontendController
 
         $totalPatientsCount = count($patientsExamined);
 
-        // Count 'pregledan' patients
         $pregledanCount = count(array_filter($patientsExamined, function ($patient) {
             return $patient->getPregled() === 'Pregledan';
         }));
 
-        // Count 'nepregledan' patients
         $nepregledanCount = count(array_filter($patientsExamined, function ($patient) {
             return $patient->getPregled() === 'Ne pregledan';
         }));
 
-        // Count 'nepregledan' patients
         $umroCount = count(array_filter($patientsExamined, function ($patient) {
             return $patient->getPregled() === 'Umro';
         }));
 
-        // Calculate the percentages
         $pregledanPercentage = ($totalPatientsCount > 0) ? ($pregledanCount / $totalPatientsCount * 100) : 0;
         $nepregledanPercentage = ($totalPatientsCount > 0) ? ($nepregledanCount / $totalPatientsCount * 100) : 0;
 
@@ -50,7 +47,8 @@ class DefaultController extends FrontendController
             'nepregledan' => $nepregledanCount,
             'pregledanPercentage' => $pregledanPercentage,
             'nepregledanPercentage' => $nepregledanPercentage,
-            'umroPercentage' => $umroCount
+            'umroPercentage' => $umroCount,
+
         ]);
     }
 

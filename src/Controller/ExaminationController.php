@@ -1,6 +1,5 @@
 <?php
 
-// src/Controller/PatientController.php
 
 namespace App\Controller;
 
@@ -27,13 +26,10 @@ class ExaminationController extends FrontendController
     {
 
 
-        // Handle form submission manually
         if ($request->isMethod('POST')) {
             $formData = $request->request->all();
 
-            // Validate form data manually
             if ($this->validateFormData($formData)) {
-                // Process and save Patient
                 $patient = new Patient();
                 $patient->setParent(Service::createFolderByPath('/patients/new'));
                 $patient->setKey($formData['firstname'].$formData['lastname']);
@@ -41,10 +37,8 @@ class ExaminationController extends FrontendController
                 $patient->setLastname($formData['lastname']);
                 $patient->setPregled($formData['status']);
                 $patient->setDescription($formData['diagnosis']);
-                // Add any other necessary properties for Patient
                 $patient->save();
 
-                // Process and save Examination
                 $examination = new Examinations();
                 $examination->setParent(Service::createFolderByPath('/examinations'));
                 $examination->setKey($formData['firstname'].$formData['lastname']);
@@ -56,10 +50,8 @@ class ExaminationController extends FrontendController
                 $examination->setExaminationDate($examinationDate);
                 $examination->setPregled($formData['status']);
 
-                // Associate Examination with Patient
                 $examination->setPatientrelation($patient);
 
-                // Save both Patient and Examination
                 $patient->save();
                 $examination->save();
 
@@ -77,8 +69,7 @@ class ExaminationController extends FrontendController
 
     private function validateFormData(array $formData): bool
     {
-        // Perform manual validation logic
-        // Return true if data is valid, false otherwise
+
         return isset($formData['firstname']) && isset($formData['lastname']);
     }
 

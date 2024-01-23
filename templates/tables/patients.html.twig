@@ -9,7 +9,7 @@
             <h1>{{ pimcore_input('tablename') }}</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Šalter</a></li>
+                    <li class="breadcrumb-item"><a href="/Pocetna">Šalter</a></li>
                     <li class="breadcrumb-item">Tables</li>
                     <li class="breadcrumb-item active">Data</li>
                 </ol>
@@ -34,8 +34,8 @@
                                     </th>
                                     <th>Prezime</th>
                                     <th>Grad</th>
-                                    <th>Edit</th>
                                     <th>Status</th>
+                                    <th>Edituj/Izbrisi</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -45,7 +45,7 @@
                                             <td>{{ pacijent.getFirstname() }}</td>
                                             <td>{{ pacijent.getLastname() }}</td>
                                             <td>{{ pacijent.getCity() }}</td>
-                                            <td><a href="{{ path('patient_class_edit', {'id': pacijent.id}) }}">Edit</a></td>
+
                                                 {% if pacijent.getPregled() == 'Pregledan' %}
                                                     <td><span class="badge bg-success">{{ pacijent.getPregled() }}</span></td>
                                                 {% elseif pacijent.getPregled() == 'Ne pregledan' %}
@@ -53,6 +53,12 @@
                                                 {% else %}
                                                     <td><span class="badge bg-danger">{{ pacijent.getPregled() }}</span></td>
                                                 {% endif %}
+
+                                            <td>
+                                                <a href="{{ path('patient_class_edit', {'id': pacijent.id}) }}" class="btn btn-primary">Edit</a>
+                                                <a href="{{ path('patient_remove', {'id': pacijent.id}) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this patient?')">Remove</a>
+                                            </td>
+
                                         </tr>
                                     {% endfor %}
 

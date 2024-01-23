@@ -44,6 +44,7 @@ services:
     #
 
 
+
     # auto-register all controllers as services
     App\Controller\:
         resource: '../src/Controller'

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use Pimcore\Controller\FrontendController;
-use Pimcore\Model\DataObject\Doctor; // Make sure to import your DataObject class
+use Pimcore\Model\DataObject\Doctor;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Pimcore\Translation\Translator;
@@ -19,12 +19,9 @@ class DoctorController extends FrontendController
     {
 
 
-        // Handle form submission manually
         if ($request->isMethod('POST')) {
             $formData = $request->request->all();
-            // Validate form data manually
             if ($this->validateFormData($formData)) {
-                // Process and save data
                 $doctors = new Doctor();
                 $doctors->setParent(Service::createFolderByPath('/doctors'));
                 $doctors->setKey($formData['username']);
@@ -49,8 +46,7 @@ class DoctorController extends FrontendController
 
     private function validateFormData(array $formData): bool
     {
-        // Perform manual validation logic
-        // Return true if data is valid, false otherwise
+
         return isset($formData['firstname']) && isset($formData['lastname']);
     }
 
