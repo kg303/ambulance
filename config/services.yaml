@@ -43,15 +43,20 @@ services:
     # CONTROLLERS
     #
 
+    Pimcore\Security\User\ObjectUserProvider:
+        arguments: [ 'App\Model\DataObject\Doctor', 'username' ]
 
+    website_demo.security.password_hasher_factory:
+        class: Pimcore\Security\Hasher\Factory\UserAwarePasswordHasherFactory
+        arguments:
+            - Pimcore\Security\Hasher\PasswordFieldHasher
+            - [ 'password' ]
 
     # auto-register all controllers as services
     App\Controller\:
         resource: '../src/Controller'
         public: true
         tags: [ 'controller.service_arguments' ]
-
-
     #
     # COMMANDS
     #
@@ -65,6 +70,7 @@ services:
     App\Twig\Extension\UniqidExtension:
         tags: ['twig.extension']
 
+    App\Form\LoginFormType: ~
 
     # Example custom templating helper
     # App\Templating\Helper\Example:
@@ -78,3 +84,5 @@ services:
     # App\EventListener\TestListener:
     #     tags:
     #         - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: onObjectPreUpdate }
+
+    App\Security\CustomAuthenticator:

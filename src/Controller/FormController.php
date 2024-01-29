@@ -16,9 +16,9 @@ class FormController extends FrontendController
         $doctors = Doctor::getList();
         $patients = Patient::getList();
 
-        $doctorName = [];
+        $doctorLastName = [];
         foreach ($doctors as $doctor) {
-            $doctorName[$doctor->getFirstname()] = $doctor->getFirstname();
+            $doctorLastName[$doctor->getLastname()] = $doctor->getLastname();
         }
 
         $patientName = [];
@@ -32,7 +32,7 @@ class FormController extends FrontendController
         }
 
         return $this->render('pregledi/index.html.twig', [
-            'doctorNames' => $doctorName,
+            'doctorNames' => $doctorLastName,
             'patientNames' => $patientName,
             'patientLastNames' => $patientLastName
         ]);

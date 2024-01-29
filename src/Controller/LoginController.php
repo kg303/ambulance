@@ -2,60 +2,78 @@
 
 namespace App\Controller;
 
-use Pimcore\Model\DataObject\Doctor;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\LoginFormType;
+use App\Model\DataObject\Doctor;
+use Pimcore\DataObject\Consent\Service;
+use Pimcore\Translation\Translator;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Pimcore\Controller\FrontendController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class LoginController extends AbstractController
+class LoginController extends BaseController
 {
     /**
-     * @Route("/Prijava", name="Prijava")
+     * @Route("/")
+     *
+     * @param AuthenticationUtils $authenticationUtils
      * @param Request $request
-     * @param UserPasswordHasherInterface $passwordHasher
-     * @return Response
+     * @param UserInterface|null $user
+     *
+     * @return Response|RedirectResponse
      */
-    public function loginAction(Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    public function loginAction(
+        AuthenticationUtils $authenticationUtils,
+        Request $request,
+        UserInterface $user = null
+    ): Response
+
     {
-        $errormessage = null;
-        $successMessage = null;
 
-        if ($request->isMethod('POST')) {
-            try {
-                $providedUsername = $request->request->get('username');
-                $providedPassword = $request->request->get('password');
-
-                $doctor = Doctor::getByUsername($providedUsername,1);
-
-//                dd(password_verify($providedPassword, $doctor->getPassword()));
-//                foreach ($doctors as $doctor) {
-//                    $username = $doctor->getUsername();
-//                    $password = $doctor->getPassword();
-
-//                    if ($doctorusername === $providedUsername) {
-
-                        if ($passwordHasher->isPasswordValid($doctor, $providedPassword)) {
-                            $successMessage = 'Successfully logged in!';
-                            return $this->redirectToRoute('patient_list');
-                        }
-
-
-                throw new BadCredentialsException('Invalid username or password');
-            } catch (BadCredentialsException $exception) {
-
-                $errormessage = 'Invalid username or password';
-            }
+        //redirect user to index page if logged in
+        if ($user && $this->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('home');
         }
 
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
 
-        $successMessage = $request->query->get('successMessage');
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        $formData = [
+            '_username' => $lastUsername
+        ];
+
+        $form = $this->createForm(LoginFormType::class, $formData, [
+            'action' => $this->generateUrl('login'),
+        ]);
+
+        //store referer in session to get redirected after login
+        if (!$request->get('no-referer-redirect')) {
+            $request->getSession()->set('_security.demo_frontend.target_path', $request->headers->get('referer'));
+        }
 
         return $this->render('account/login.html.twig', [
-            'errormessage' => $errormessage,
-            'successMessage' => $successMessage,
+            'form' => $form->createView(),
+            'error' => $error ? 'Credentials are not valid.' : '',
         ]);
     }
+
+    // Your logoutAction remains the same
+    public function logoutAction(SessionInterface $session)
+    {
+        $session->invalidate();
+
+        return new RedirectResponse('/');
+    }
 }
+

@@ -10,8 +10,8 @@
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        {% do pimcore_head_link().appendStylesheet(asset("static/assets/img/favicon.png")) %}
-        {% do pimcore_head_link().appendStylesheet(asset("static/assets/img/apple-touch-icon.png")) %}
+        {% do pimcore_head_link().appendStylesheet({ rel: 'icon', type: 'image/png', href: asset("static/assets/img/favicon.png") })%}
+        {% do pimcore_head_link().appendStylesheet({ rel: 'apple-touch-icon', sizes: '180x180', href: asset("static/assets/img/apple-touch-icon.png") }) %}
 
         <!-- Google Fonts -->
         {% do pimcore_head_link().appendStylesheet("https://fonts.gstatic.com") %}
@@ -73,10 +73,11 @@
 </head>
 
 <body>
-{#{% if app.user  %}#}
+
+
     {% include 'includes/header.html.twig' %}
     {% include 'includes/sidebar.html.twig' %}
-{#{% endif %}#}
+
 
 {% block content %}
 {% endblock %}

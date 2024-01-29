@@ -19,38 +19,40 @@ class DefaultController extends FrontendController
     #[Template('home/main.html.twig')]
     public function defaultAction(Request $request, Security $security)
     {
-        $patients = Patient::getList();
 
-        $patientsExamined = iterator_to_array($patients);
+            $patients = Patient::getList();
 
-        $totalPatientsCount = count($patientsExamined);
+            $patientsExamined = iterator_to_array($patients);
 
-        $pregledanCount = count(array_filter($patientsExamined, function ($patient) {
-            return $patient->getPregled() === 'Pregledan';
-        }));
+            $totalPatientsCount = count($patientsExamined);
 
-        $nepregledanCount = count(array_filter($patientsExamined, function ($patient) {
-            return $patient->getPregled() === 'Ne pregledan';
-        }));
+            $pregledanCount = count(array_filter($patientsExamined, function ($patient) {
+                return $patient->getPregled() === 'Pregledan';
+            }));
 
-        $umroCount = count(array_filter($patientsExamined, function ($patient) {
-            return $patient->getPregled() === 'Umro';
-        }));
+            $nepregledanCount = count(array_filter($patientsExamined, function ($patient) {
+                return $patient->getPregled() === 'Ne pregledan';
+            }));
 
-        $pregledanPercentage = ($totalPatientsCount > 0) ? ($pregledanCount / $totalPatientsCount * 100) : 0;
-        $nepregledanPercentage = ($totalPatientsCount > 0) ? ($nepregledanCount / $totalPatientsCount * 100) : 0;
+            $umroCount = count(array_filter($patientsExamined, function ($patient) {
+                return $patient->getPregled() === 'Umro';
+            }));
 
-        return $this->render('home/main.html.twig', [
-            'patients' => $patients,
-            'totalPatientsCount' => $totalPatientsCount,
-            'pregledan' => $pregledanCount,
-            'nepregledan' => $nepregledanCount,
-            'pregledanPercentage' => $pregledanPercentage,
-            'nepregledanPercentage' => $nepregledanPercentage,
-            'umroPercentage' => $umroCount,
+            $pregledanPercentage = ($totalPatientsCount > 0) ? ($pregledanCount / $totalPatientsCount * 100) : 0;
+            $nepregledanPercentage = ($totalPatientsCount > 0) ? ($nepregledanCount / $totalPatientsCount * 100) : 0;
 
-        ]);
-    }
+            return $this->render('home/main.html.twig', [
+                'patients' => $patients,
+                'totalPatientsCount' => $totalPatientsCount,
+                'pregledan' => $pregledanCount,
+                'nepregledan' => $nepregledanCount,
+                'pregledanPercentage' => $pregledanPercentage,
+                'nepregledanPercentage' => $nepregledanPercentage,
+                'umroPercentage' => $umroCount,
+
+            ]);
+        }
+
 
 
 

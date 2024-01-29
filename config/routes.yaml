@@ -18,6 +18,7 @@ doctor_form:
     path: /submit-doctor-form
     controller: 'App\Controller\DoctorController::doctorSubmitAction'
 
+
 patient_class_edit:
     path: /Pacijenti/edit/{id}
     controller: 'App\Controller\PatientController::edit'
@@ -27,16 +28,41 @@ patient_remove:
     path: /Pacijenti/remove/{id}
     controller: 'App\Controller\PatientController::remove'
 
+doctor_class_edit:
+    path: /Doktori/edit/{id}
+    controller: 'App\Controller\DoctorController::edit'
+    methods: [GET, POST]
+
+doctor_remove:
+    path: /Doktori/remove/{id}
+    controller: 'App\Controller\DoctorController::remove'
+
 patient_list:
     path: /Pacijenti
     controller: 'App\Controller\PatientController::listingAction'
     methods: ['GET']
 
-Prijava:
-    path: /Prijava
+doctors_list:
+    path: /Doktori
+    controller: 'App\Controller\DoctorController::doctorAction'
+    methods: ['GET']
+
+login:
+    path: /login
     controller: 'App\Controller\LoginController::loginAction'
 
 register:
     path: /Registracija
     controller: 'App\Controller\RegisterController::registerAction'
 
+Doktori:
+    path: /Doktori
+    controller: 'App\Controller\DoctorController::doctorAction'
+
+home:
+    path: /Pocetna
+    controller: 'App\Controller\DefaultController::defaultAction'
+
+logout:
+    path: /logout
+    controller: 'App\Controller\LoginController::logoutAction'

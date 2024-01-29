@@ -11,6 +11,7 @@
  * - username [input]
  * - password [password]
  * - doctorType [select]
+ * - roles [multiselect]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -20,7 +21,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => 'Doctor',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1705675496,
+   'modificationDate' => 1706519957,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -264,6 +265,47 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'optionsProviderClass' => '',
              'optionsProviderData' => '',
           )),
+          5 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Multiselect::__set_state(array(
+             'name' => 'roles',
+             'title' => 'Roles',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'ROLE_USER',
+                'value' => 'ROLE_USER',
+              ),
+              1 => 
+              array (
+                'key' => 'ROLE_ADMIN',
+                'value' => 'ROLE_ADMIN',
+              ),
+            ),
+             'maxItems' => 2,
+             'renderType' => 'list',
+             'dynamicOptions' => false,
+             'height' => '',
+             'width' => '',
+             'optionsProviderType' => 'configure',
+             'optionsProviderClass' => 'Pimcore\\Bundle\\CoreBundle\\OptionsProvider\\SelectOptionsOptionsProvider',
+             'optionsProviderData' => '',
+          )),
         ),
          'locked' => false,
          'blockedVarsForExport' => 
@@ -321,6 +363,47 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Multiselect::__set_state(array(
+       'name' => 'role',
+       'title' => 'Role',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'options' => 
+      array (
+        0 => 
+        array (
+          'key' => 'ROLE_DOCTOR',
+          'value' => 'ROLE_DOCTOR',
+        ),
+        1 => 
+        array (
+          'key' => 'ROLE_ADMIN',
+          'value' => 'ROLE_ADMIN',
+        ),
+      ),
+       'maxItems' => NULL,
+       'renderType' => 'list',
+       'dynamicOptions' => false,
+       'height' => '',
+       'width' => '',
+       'optionsProviderType' => 'configure',
+       'optionsProviderClass' => 'Pimcore\\Bundle\\CoreBundle\\OptionsProvider\\SelectOptionsOptionsProvider',
+       'optionsProviderData' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (

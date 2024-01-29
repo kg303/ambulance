@@ -30,12 +30,17 @@
                 {% for page in mainNavigation %}
                     {% if page.isVisible() and menuRenderer.accept(page) %}
                         {% set hasChildren = page.hasPages() %}
-
+{#{% if app.user.roles %}#}
+{#    {{ dump(app.user.roles ) }}#}
+{#                    {% endif %}#}
                         {% if not hasChildren %}
-                            <li class="nav-item">
-                                <a class="nav-link {{ document.id == page.id ? 'active' : '' }}"
-                                   href="{{ page.getHref() }}">{{ page.getLabel()|trans }}</a>
-                            </li>
+                            {% if not (page.getHref() == '/Doktori' and is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN')) %}
+                                <li class="nav-item">
+                                    <a class="nav-link {{ document.id == page.id ? 'active' : '' }}"
+                                       href="{{ page.getHref() }}">{{ page.getLabel()|trans }}</a>
+                                </li>
+                            {% endif %}
+
                         {% else %}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle {{ document.id == page.id ? 'active' : '' }}"

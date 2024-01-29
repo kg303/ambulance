@@ -33,7 +33,7 @@
                                 <th>Prezime</th>
                                 <th>Korisnicko ime</th>
                                 <th>Sifra</th>
-                                <th>Specijalizacija</th>
+                                <th>Edit/Remove</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -44,7 +44,10 @@
                                     <td>{{ doctor.getLastname() }}</td>
                                     <td>{{ doctor.getUsername() }}</td>
                                     <td>{{ doctor.getPassword() }}</td>
-                                    <td>{{ doctor.getDoctorType() }}</td>
+                                    <td>
+                                        <a href="{{ path('doctor_class_edit', {'id': doctor.id}) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ path('doctor_remove', {'id': doctor.id}) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this patient?')">Remove</a>
+                                    </td>
                                 </tr>
                             {% endfor %}
 

@@ -36,6 +36,8 @@ class RegisterController extends AbstractController
                 $user->setUsername($username);
                 $user->setFirstname($firstname);
                 $user->setLastname($lastname);
+                $user->setRoles('ROLE_DOCTOR');
+
 
                 $plaintextPassword = $request->request->get('password');
 
