@@ -87,22 +87,21 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        <b>Ime</b>
+                                        <b>Pacijent</b>
                                     </th>
-                                    <th>Prezime</th>
                                     <th>Doktor</th>
                                     <th>Datum</th>
                                     <th>Status</th>
+                                    <th>Edit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
                                 {% for examinedPatient in examinedPatients %}
                                     <tr>
-                                        <td>{{ examinedPatient.getFirstname() }}</td>
-                                        <td>{{ examinedPatient.getLastname() }}</td>
+                                        <td>{{ examinedPatient.getFirstname() }} {{ examinedPatient.getLastname() }}</td>
                                         <td>{{ examinedPatient.getDoktor() }}</td>
-                                        <td>{{ examinedPatient.getExaminationDate() }}</td>
+                                        <td>{{ examinedPatient.getExaminationDate()|date('d.m.Y H:i') }}</td>
 
                                             {% if examinedPatient.getPregled() == 'Pregledan' %}
                                                 <td><span class="badge bg-success">{{ examinedPatient.getPregled() }}</span></td>
@@ -111,6 +110,11 @@
                                             {% else %}
                                                 <td><span class="badge bg-danger">{{ examinedPatient.getPregled() }}</span></td>
                                             {% endif %}
+
+                                        <td>
+                                            <a href="{{ path('examination_edit', {'id': examinedPatient.id}) }}" class="btn btn-primary">Edit</a>
+                                            <a href="{{ path('examination_remove', {'id': examinedPatient.id}) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this patient?')">Remove</a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
 

@@ -18,6 +18,14 @@ doctor_form:
     path: /submit-doctor-form
     controller: 'App\Controller\DoctorController::doctorSubmitAction'
 
+examination_edit:
+    path: /Pacijenti/examinationedit/{id}
+    controller: 'App\Controller\PatientController::editExaminationsAction'
+    methods: [ GET, POST ]
+
+examination_remove:
+    path: /Pacijenti/examinationremove/{id}
+    controller: 'App\Controller\PatientController::removeExaminationsAction'
 
 patient_class_edit:
     path: /Pacijenti/edit/{id}

@@ -109,4 +109,36 @@ class PatientController extends FrontendController
     }
 
 
+    //FOR EXAMINED PATIENTS
+    public function editExaminationsAction(int $id): Response
+    {
+        $examinations = Examinations::getById($id);
+
+        if (!$examinations instanceof Examinations) {
+            throw $this->createNotFoundException('Patient not found');
+        }
+
+        return $this->render('profile/examinations.html.twig', ['examination' => $examinations]);
+    }
+
+
+
+    /**
+     * @Route("/Pacijenti/remove/{id}", name="patient_remove")
+     * @throws \Exception
+     */
+    public function removeExaminationsAction($id): Response
+    {
+        $examinations = Examinations::getById($id);
+
+        if (!$examinations instanceof Examinations) {
+            throw $this->createNotFoundException('Patient not found');
+        }
+
+        $examinations->delete();
+
+        return $this->redirectToRoute('patient_list');
+    }
+
+
 }

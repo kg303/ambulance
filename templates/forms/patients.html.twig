@@ -11,21 +11,21 @@
                         <div class="row mb-3">
                             <label for="firstname" class="col-sm-2 col-form-label">Ime:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="firstname" required title="Ovo polje je obavezno!">
+                                <input type="text" class="form-control" name="firstname" required title="Ovo polje je obavezno!" maxlength="100">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="inputEmail" class="col-sm-2 col-form-label">Prezime:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="lastname" required title="Ovo polje je obavezno!">
+                                <input type="text" class="form-control" name="lastname" required title="Ovo polje je obavezno!" maxlength="100">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="inputNumber" class="col-sm-2 col-form-label">JMBG:</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="jmbg" required title="Ovo polje je obavezno!">
+                                <input type="number" class="form-control" name="jmbg" required title="Ovo polje je obavezno!" minlength="13" maxlength="13">
                             </div>
                         </div>
 
@@ -49,7 +49,7 @@
                         <div class="row mb-3">
                             <label for="inputPassword" class="col-sm-2 col-form-label label-auto-resize" title="Zabiljeska - Obavezno polje">Zabiljeska:</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" style="height: 100px" title="Zabiljeska - Obavezno polje" name="description" required></textarea>
+                                <textarea class="form-control" style="height: 100px" title="Zabiljeska - Obavezno polje" name="description" required maxlength="1000"></textarea>
                             </div>
                         </div>
 

@@ -20,6 +20,11 @@ class DefaultController extends FrontendController
     public function defaultAction(Request $request, Security $security)
     {
 
+            $latestExaminations = Examinations::getList([
+                'limit' => 10,
+                'order' => ['examinationDate' => 'DESC'],
+            ]);
+
             $patients = Patient::getList();
 
             $patientsExamined = iterator_to_array($patients);
@@ -49,7 +54,7 @@ class DefaultController extends FrontendController
                 'pregledanPercentage' => $pregledanPercentage,
                 'nepregledanPercentage' => $nepregledanPercentage,
                 'umroPercentage' => $umroCount,
-
+                'latestExaminations' => $latestExaminations,
             ]);
         }
 
